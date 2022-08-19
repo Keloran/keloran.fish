@@ -1,4 +1,3 @@
-# Aliases
 if type -q nerdctl
 	alias docker="nerdctl"
 end
