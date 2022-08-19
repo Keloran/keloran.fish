@@ -2,9 +2,9 @@ A few helpful functions for fish
 
 mostly for myself, but can be helpful for others aswell
 
-#### Some notables
+# Some notables
 
-## Docker
+### Docker
 ```
 cleanDockerImages
 ```
@@ -42,7 +42,7 @@ dockerExec app
 This will launch sh or any program you specify on that container, e.g. docker app starter will run "starter" on app container, either docker-compose or standard docker
 
 
-# System
+### System
 ```
 updateSys
 ```
