@@ -14,4 +14,12 @@ else if type -q paru
 	alias yeet="paru -Rcs"
 end
 
+function updatedb --wraps updatedb
+	sudo updatedb
+end
+
+function yarn --wraps yarn
+	yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/config
+end
+
 set CDPATH $CDPATH $HOME/Documents/Projects
