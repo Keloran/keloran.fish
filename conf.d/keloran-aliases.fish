@@ -19,7 +19,7 @@ function updatedb --wraps updatedb
 end
 
 function yarn --wraps yarn
-	yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/config
+	/usr/bin/yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/config
 end
 
 set CDPATH $CDPATH $HOME/Documents/Projects
