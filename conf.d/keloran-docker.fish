@@ -33,7 +33,7 @@ function dockerPsClean --description "Clean all the non valid images from docker
 	end
 
 	set --local exitedImagesExist (command $dockerCmd ps -a --format '{{.Names}} {{.Status}}' | grep 'Exited' | wc -l)
-  set --local createdImagesExist (command $dockerCmd ps -a --format '{{.Names}} {{.Status}}' | grep 'Created' | wc -local)
+  set --local createdImagesExist (command $dockerCmd ps -a --format '{{.Names}} {{.Status}}' | grep 'Created' | wc -l)
 	if test $exitedImagesExist -gt 0
 		command $dockerCmd ps -a --format '{{.Names}} {{.Status}}' | grep 'Exited' | awk '{print $1}' | xargs $dockerCmd rm
 	end
