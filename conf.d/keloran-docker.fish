@@ -32,11 +32,14 @@ function dockerPsClean --description "Clean all the non valid images from docker
 		set dockerCmd nerdctl
 	end
 
-	set --local imagesExist (command $dockerCmd ps -a --format '{{.Names}} {{.Status}}' | wc -l)
-
-	if test $imagesExist -gt 0
+	set --local exitedImagesExist (command $dockerCmd ps -a --format '{{.Names}} {{.Status}}' | grep 'Exited' | wc -l)
+  set --local createdImagesExist (command $dockerCmd ps -a --format '{{.Names}} {{.Status}}' | grep 'Created' | wc -local)
+	if test $exitedImagesExist -gt 0
 		command $dockerCmd ps -a --format '{{.Names}} {{.Status}}' | grep 'Exited' | awk '{print $1}' | xargs $dockerCmd rm
 	end
+  if test $createdImagesExist -gt 0
+    command $dockerCmd ps -a --format '{{.Names}} {{.Status}}' | grep 'Created' | awk '{print $1}' | xargs $dockerCmd rm
+  end
 end
 
 function dockerClean --description "Docker Clean"
@@ -130,7 +133,7 @@ function dockerExec --description "Execute in container"
 			echo "Missing container name to execute into"
 			command $dockerCmd compose ps -a
 			return
-		else 
+		else
 			if test (count $argv) -eq 2
 				command $dockerCmd compose exec $argv[1] $argv[2]
 			else
